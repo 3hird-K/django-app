@@ -1,0 +1,30 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Django Tailwind</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+    /* This checks the user's saved preference or system settings instantly */
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
+
+<div class="container mx-auto">
+    <section class="flex items-center justify-center h-screen">
+        <h1 class="text-5xl">Django + Tailwind</h1>
+        <c-theme_toggle />
+    </section>
+</div>
+</body>
+</html>

@@ -1,26 +1,56 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
-{% load static %}
-<html lang="en">
+<html lang="en" class="antialiased">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {% block title %}
-            Django App
-        {% endblock %}
+        {% block title %}Django App{% endblock %}
     </title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/main.js' %}" defer></script>
+    
+    {% tailwind_css %}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="{% url 'posts:list' %}">Posts</a>
-    </nav>
-    <main>
+<body class="min-h-screen bg-background text-foreground flex flex-col font-sans">
+    
+    <header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="container mx-auto flex h-14 items-center justify-between px-4 md:px-8">
+            
+            <div class="flex items-center">
+                <a href="/" class="flex items-center space-x-2 font-bold tracking-tight hover:opacity-80 transition-opacity">
+                    <span>DjangoApp</span>
+                </a>
+            </div>
+
+            <nav class="flex items-center space-x-6 text-sm font-medium">
+                <a href="/" class="transition-colors hover:text-primary text-muted-foreground">Home</a>
+                <a href="/about/" class="transition-colors hover:text-primary text-muted-foreground">About</a>
+                <a href="{% url 'posts:list' %}" class="transition-colors hover:text-primary text-foreground">Posts</a>
+                <c-theme_toggle />
+            </nav>
+            
+        </div>
+    </header>
+
+    <main class="flex-1 container mx-auto px-4 md:px-8 py-8">
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="border-t border-border py-6 md:py-0 mt-auto">
+        <div class="container mx-auto flex flex-col items-center justify-center gap-4 md:h-16 md:flex-row">
+            <p class="text-center text-sm leading-loose text-muted-foreground">
+                Built with Django, Tailwind CSS, and Shadcn.
+            </p>
+        </div>
+    </footer>
+
 </body>
 </html>

@@ -23,4 +23,6 @@ urlpatterns = [
     path('', views.home),
     path('about/', views.about),
     path('posts/', include('posts.urls')),
+    path('__reload__/', include('django_browser_reload.urls')),
+    path('cotton/', include('django_cotton.urls'))
 ]
