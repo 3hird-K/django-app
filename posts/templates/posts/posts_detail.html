@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Post Detail
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>Post Detail</h1>
+        <article>
+            <h6>{{ post.title }}</h6>
+            <p>{{ post.slug }}</p>
+            <p>{{ post.date }}</p>
+            <p>{{ post.body }}</p> 
+        </article>
+    </section>    
+{% endblock %}
