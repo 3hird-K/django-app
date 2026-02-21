@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif
+}
+
+body {
+    min-height: 100vh;
+    background-color: black;
+    color: whitesmoke;
+    font-size: 3rem;
+    display: flex;
+    flex-flow: column;
+}
+
+nav {
+    padding: 1rem;
+    background-color: #4459b7;
+    color: white;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+main {
+    flex-grow: 1;
+    display: grid;
+    place-content: center;
+}
+
+h1,
+p {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #819edb;
+}
+
+a:hover {
+    opacity: .85;
+}

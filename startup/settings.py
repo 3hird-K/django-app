@@ -22,12 +22,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3e35$modg+9-@=3ev%c03b6)9^=smb=h4f+$!zn8o+x@mul_$x'
+# SECRET_KEY = 'django-insecure-3e35$modg+9-@=3ev%c03b6)9^=smb=h4f+$!zn8o+x@mul_$x'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='o(f3$fy#%wpdfot$(-1bv#j1up=&oit$y_64ki6yu^h=@jw*(b')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost']
+
+VERCEL_HOST = os.getenv('ALLOWED_HOSTS')
+if VERCEL_HOST:
+    ALLOWED_HOSTS.append(VERCEL_HOST)
 
 
 # Application definition
@@ -136,3 +143,5 @@ STATICFILES_DIRS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
